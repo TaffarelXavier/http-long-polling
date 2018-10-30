@@ -35,10 +35,10 @@ var ls = window.localStorage;
          * @param {type} msg
          * @returns {undefined}
          */
-//        function preencherTabela(msg) {
-//            $("#tabelaCorpo").append(msg);
-//            $('#carregando').hide();
-//        }
+        function preencherTabela(msg) {
+            $("#tabelaCorpo").append(msg);
+            $('#carregando').hide();
+        }
 
         function carregarDadosLong() {
 
@@ -53,12 +53,13 @@ var ls = window.localStorage;
                     /*{tipo_de_carregamento: 'periodo', ultimo_id: isNaN(_ultimoId) ? 0 : _ultimoId}*/
                     success: settings.receberDados,
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        //preencherTabela(textStatus + " (" + errorThrown + ")");
+                        preencherTabela(textStatus + " (" + errorThrown + ")");
                         setTimeout(carregarDadosLong, 10000);
                     }
                 });
             }
         }
+        
         //
         //Para carregar de tempos em tempos:
         window.setInterval(carregarDadosLong, settings.tempoCarregamento);
