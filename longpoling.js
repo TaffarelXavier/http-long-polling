@@ -12,8 +12,9 @@ var ls = window.localStorage;
 (function($) {
     var d = $.fn.LongPoling = function(options) {
         //Verifica se o usuário está na página
+        
         var estaNaPagina = true;
-        // This is the easiest way to have default options.
+        // Essa é a maneira mais fácil de ter opções padrão.
         var settings = $.extend({
             // These are the defaults.
             nomeDaVariavelLocalStorage: "dados",
