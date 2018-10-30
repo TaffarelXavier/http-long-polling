@@ -1,22 +1,34 @@
 /**
  * 
  * Descrição:
- *          Este Plugin é usado para fazer LongPoling
+ *          Este Plugin é usado para fazer LongPolling
  * 
  * Precisa de um método parecido a este:
  *  var objAjax = function (_data) {
  $("#resultado").html(_data);
+ <p>Como usar?</p>
+ <p>Na página, onde você quer fazer um LongPolling, insira este código:</p>
+//Início do LongPolilng
+ $(this).LongPolling({
+    nomeDaVariavelLocalStorage: "dados",
+    url: "",
+    tempoCarregamento: 1000,
+    metodo: "POST",
+    dataHttp: {},
+    objetoParaPreencher: '',
+    receberDados: null
+ });
  };
  */
 var ls = window.localStorage;
-(function($) {
-    var d = $.fn.LongPoling = function(options) {
+(function ($) {
+    var d = $.fn.LongPolling = function (options) {
         //Verifica se o usuário está na página
-        
+
         var estaNaPagina = true;
         // Essa é a maneira mais fácil de ter opções padrão.
         var settings = $.extend({
-            // These are the defaults.
+            // Esses são os valores padrões.
             nomeDaVariavelLocalStorage: "dados",
             url: "",
             tempoCarregamento: 1000,
@@ -25,6 +37,7 @@ var ls = window.localStorage;
             objetoParaPreencher: '',
             receberDados: null
         }, options);
+
         /*
          * <p>Preenche os dados por linha</p>
          * @param {type} msg
@@ -41,7 +54,7 @@ var ls = window.localStorage;
                     data: settings.dataHttp,
                     /*{tipo_de_carregamento: 'periodo', ultimo_id: isNaN(_ultimoId) ? 0 : _ultimoId}*/
                     success: settings.receberDados,
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
                         setTimeout(carregarDadosLong, 10000);
                     }
                 });
@@ -67,17 +80,17 @@ var ls = window.localStorage;
                 data: settings.dataHttp,
                 /*{tipo_de_carregamento: 'periodo', ultimo_id: isNaN(_ultimoId) ? 0 : _ultimoId}*/
                 success: settings.receberDados,
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
                     setTimeout(carregarDadosLong, 10000);
                 }
             });
         }
         //Ao entrar na página
-        window.onfocus = function() {
+        window.onfocus = function () {
             estaNaPagina = true;
         };
         //Ao sair da página
-        window.onblur = function() {
+        window.onblur = function () {
             estaNaPagina = false;
         };
         //Carrega todos os dados de uma vez
@@ -88,7 +101,7 @@ var ls = window.localStorage;
          *visibilityState para hidden, quando ele retorna, então, visibilityState recebe o valor de <b>visible</b>.
          * @type type
          */
-        document.addEventListener('visibilitychange', function() {
+        document.addEventListener('visibilitychange', function () {
             if (document.visibilityState == 'visible') {
                 estaNaPagina = true;
                 carregarTodosOsDados();
@@ -96,7 +109,7 @@ var ls = window.localStorage;
                 estaNaPagina = false;
             }
         }, false);
-        return this.each(function() {
+        return this.each(function () {
             return ls.getItem(settings.nomeDaVariavelLocalStorage);
         });
     };
