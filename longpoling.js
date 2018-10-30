@@ -59,7 +59,6 @@ var ls = window.localStorage;
                 });
             }
         }
-        
         //
         //Para carregar de tempos em tempos:
         window.setInterval(carregarDadosLong, settings.tempoCarregamento);
