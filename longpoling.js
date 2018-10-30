@@ -29,10 +29,6 @@ var ls = window.localStorage;
          * @param {type} msg
          * @returns {undefined}
          */
-        function preencherTabela(msg) {
-            $("#tabelaCorpo").append(msg);
-            $('#carregando').hide();
-        }
         function carregarDadosLong() {
             if (estaNaPagina == true) {
                 $.ajax({
@@ -45,7 +41,6 @@ var ls = window.localStorage;
                     /*{tipo_de_carregamento: 'periodo', ultimo_id: isNaN(_ultimoId) ? 0 : _ultimoId}*/
                     success: settings.receberDados,
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        preencherTabela(textStatus + " (" + errorThrown + ")");
                         setTimeout(carregarDadosLong, 10000);
                     }
                 });
@@ -72,7 +67,6 @@ var ls = window.localStorage;
                 /*{tipo_de_carregamento: 'periodo', ultimo_id: isNaN(_ultimoId) ? 0 : _ultimoId}*/
                 success: settings.receberDados,
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    preencherTabela(textStatus + " (" + errorThrown + ")");
                     setTimeout(carregarDadosLong, 10000);
                 }
             });
